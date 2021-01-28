@@ -1,0 +1,17 @@
+for motor drivers PH/EN mode is used . phase pin controls direction and eneable pin duty cycle. 3 motor drivers control 3 motors speed and direction.
+motor driver used was DRV8874. 
+
+
+
+apb2 block is running at 160 mhz for motor drivers, apb1 is running at 3.2 mhz for esc and servo. this board allows us to control 3 brushed motors, one esc and one servo 
+features usb connectivity and complete isolation of MCU from motor drivers. 
+
+motors run on battery voltage about 15 volts(4s lipo), servo gets 5 volts from regulator. esc gets 18 volts from stepup driver, mcu gets 3.3 volts regulated from usb 5 v.
+
+
+MCU configuration:
+for motor controls we need 3 gpio and 3 pwm. for pwm timer 15 ch1 and ch2 , and timer 8 chanel 1 were used, all run at 160 mhz. 
+for esc tim3 ch3 was used running at 3.2 mhz and for servo tim 3 ch2 was used. 
+
+comunication is over usb and every time MCU gets 9 numbers separated by ';'. motor1speed(0;65000),motor2speed(0;65000),m3speed(0;65000),m1direction(0 or 1),m2direction(0 or 1),m3direction(0 or 1),servo(0-10000),esccpeed(0-10000),delimiter(99999)
+example message: 11111;11111;11111;1;1;1;1000;1000;99999
